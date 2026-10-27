@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MAHASISWA Mobile</title>
+<style>
+:root{--b:#1269d8;--n:#073b8c;--bg:#f3f6fc;--c:#fff;--t:#17243a;--m:#71839d;--l:#dce4f0;--s:#e8f1ff;--ok:#0c9b68;--er:#e04c58;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d1526;--c:#162036;--t:#e6edf8;--m:#9aabc4;--l:#2b3a57;--s:#1d2c4a}}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--t);font-family:Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}
+.hidden{display:none!important}.page{display:none}.page.active{display:block;animation:in .3s ease-out}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.app,.login{max-width:440px;min-height:100vh;margin:auto;padding-bottom:90px}
+.login{padding:28px 22px;display:flex;flex-direction:column;justify-content:center}
+.logo{font-size:27px;font-weight:900;color:var(--b)}.login p{color:var(--m);font-size:14px;line-height:1.6}
+label{display:block;margin:14px 0 7px;font-size:13px;font-weight:bold}
+input,select{width:100%;padding:13px;border:1px solid #94a3b8;border-radius:11px;background:var(--c);color:var(--t);font-size:14px;transition:.2s}
+input:focus,select:focus{border-color:var(--b);box-shadow:0 0 0 3px #1269d826;outline:0}
+.hint{font-size:12px;color:var(--m);margin-top:5px;min-height:16px}
+.row{display:flex;gap:7px}.row input{flex:1;min-width:0}
+.tg{border:1px solid var(--l);background:var(--s);color:var(--b);border-radius:11px;padding:0 10px;font-size:12px}
+.primary,.secondary{width:100%;padding:14px;margin-top:15px;border:0;border-radius:12px;background:var(--b);color:#fff;font-weight:bold;transition:.2s}
+.secondary{background:var(--c);color:var(--b);border:1px solid var(--l);margin-top:10px}
+button:active{transform:scale(.96)}
+.notice{padding:12px;margin-top:15px;border-radius:11px;background:#fff5db;color:#785718;font-size:12px;line-height:1.6}
+.header{background:linear-gradient(135deg,#073b8c,#1675e8);color:#fff;padding:23px 20px 27px;border-radius:0 0 25px 25px}
+.top,.bl{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brand{font-weight:900;font-size:18px}.brand small{display:block;font-size:10px;letter-spacing:2px;margin-top:4px}
+.avatar,.eye{border:1px solid #fff;background:#1853a0;color:#fff;border-radius:10px;padding:10px}
+.bc{margin-top:23px;background:#1853a0;border:1px solid #8dbbff;border-radius:18px;padding:18px;color:#fff}
+.bal{font-size:27px;font-weight:800;margin-top:8px}.mut{font-size:12px;opacity:.8}
+.content{padding:20px}.title{font-size:17px;font-weight:800;margin:5px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.action,.sv{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:12px 4px;text-align:center;color:var(--t);transition:.2s;min-width:0;overflow-wrap:anywhere;font-size:11px;font-weight:bold}
+.action:hover,.sv:hover{transform:translateY(-3px);border-color:#8bb8f5;box-shadow:0 6px 14px #1269d81c}
+.action b,.sv b{display:block;font-size:24px;margin-bottom:7px}
+.panel{background:var(--c);padding:16px;border:1px solid var(--l);border-radius:17px;margin-top:18px}
+.ph{display:flex;align-items:center;gap:12px;margin-bottom:18px}.ph h2{font-size:20px;margin:0}
+.back{border:0;background:var(--s);color:var(--b);border-radius:10px;padding:10px}
+.tx{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--l);font-size:13px}
+.ti{flex:1}.tx small{display:block;color:var(--m);margin-top:5px}.gr{color:var(--ok)}.rd{color:var(--er)}
+.empty{color:var(--m);font-size:13px}
+.items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:10px 0}
+.ic{background:var(--c);border:2px solid var(--l);border-radius:12px;padding:12px 10px;text-align:left;color:var(--t);min-width:0}
+.ic:hover,.ic.on{border-color:var(--b)}.ic.on{background:var(--s)}
+.ic .n{display:block;font-size:13px;font-weight:bold;overflow-wrap:anywhere}
+.ic .p{display:block;color:var(--b);font-size:14px;font-weight:bold;margin-top:8px}
+.ic .d{display:block;color:var(--m);font-size:11px;margin-top:4px}
+.sum{background:var(--s);border:1px solid var(--l);border-radius:10px;padding:12px;margin:12px 0;font-size:13px;line-height:1.7}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;background:var(--c);border-top:1px solid var(--l);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom,0px));z-index:10}
+.ni{border:0;background:transparent;color:var(--m);font-size:10px;min-width:52px;padding:4px 1px;border-radius:12px}
+.ni span{display:block;font-size:20px;margin-bottom:3px}.ni.active{color:var(--b);font-weight:bold}
+.qn{background:linear-gradient(135deg,#073b8c,#1976e8);color:#fff!important;padding:7px 12px;box-shadow:0 3px 10px #1269d840}
+.bp{position:relative}
+.bcur{width:100%;display:flex;align-items:center;gap:10px;padding:9px;border:1px solid var(--l);border-radius:11px;background:var(--c);color:var(--t);text-align:left}
+.bl2{width:36px;height:36px;border-radius:10px;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:900;flex-shrink:0}
+.bn{flex:1;font-size:13px}
+.bm{position:absolute;top:100%;left:0;right:0;max-height:250px;overflow:auto;background:var(--c);border:1px solid var(--l);border-radius:12px;z-index:5;padding:5px;box-shadow:0 10px 25px #1b315030}
+.bo{display:flex;align-items:center;gap:9px;width:100%;padding:8px;border:0;background:var(--c);color:var(--t);text-align:left;border-radius:9px}
+.bo:hover{background:var(--s)}
+.qf{display:grid;place-items:center;margin:14px 0}.qf svg{width:190px;height:190px;border:6px solid #fff;border-radius:10px}
+.receipt{background:var(--c);padding:16px;border:1px solid var(--l);border-radius:16px;line-height:1.6;font-size:14px}
+@media(max-width:380px){.items{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<section id="loginScreen" class="login">
+  <div class="logo">🏦 MAHASISWA</div>
+  <p>MOBILE BANKING DEMO<br>Masuk untuk mencoba layanan keuangan.</p>
+  <label for="username">Username</label>
+  <input id="username" value="Rara" placeholder="Masukkan username" oninput="loginHints()">
+  <div id="userHint" class="hint"></div>
+  <label for="password">Kata sandi / PIN demo</label>
+  <div class="row">
+    <input id="password" type="password" value="123456" placeholder="Masukkan kata sandi" oninput="loginHints()">
+    <button class="tg" type="button" id="tgBtn" onclick="togglePassword()">👁 Tampilkan</button>
+  </div>
+  <div id="passHint" class="hint"></div>
+  <button class="primary" onclick="login()">Masuk ke aplikasi</button>
+  <div class="notice">Ini aplikasi simulasi. Jangan masukkan PIN atau kata sandi bank asli.</div>
+</section>
+
+<div id="app" class="app hidden">
+<header class="header">
+  <div class="top">
+    <div class="brand">MAHASISWA MOBILE<small>SMART BANKING DEMO</small></div>
+    <button class="avatar" onclick="showPage('profile')">👤</button>
+  </div>
+  <div class="bc">
+    <div class="mut">Total saldo demo</div>
+    <div class="bl"><div class="bal" id="balanceText"></div><button class="eye" onclick="toggleBalance()">◉</button></div>
+    <div class="mut">Rekening demo: 1234 5678 9012</div>
+  </div>
+</header>
+
+<main class="content">
+  <section id="homePage" class="page active">
+    <div class="title">Layanan keuangan</div>
+    <div class="grid">
+      <button class="action" onclick="showPage('topup')"><b>💳</b>Isi Saldo</button>
+      <button class="action" onclick="showPage('transfer')"><b>↗️</b>Transfer</button>
+      <button class="action" onclick="showPage('withdraw')"><b>🏧</b>Tarik Tunai</button>
+      <button class="action" onclick="showPage('history')"><b>📋</b>Riwayat</button>
+    </div>
+    <div class="panel">
+      <div class="title">Semua Layanan</div>
+      <div class="sg" id="svGrid"></div>
+    </div>
+    <div class="panel">
+      <div class="title">Transaksi terakhir</div>
+      <div id="recentTransactions"></div>
+      <button class="secondary" onclick="showPage('history')">Lihat semua transaksi</button>
+    </div>
+    <div class="notice">Semua saldo, harga, dan transaksi hanya simulasi lokal, tidak terhubung ke bank atau penyedia layanan sungguhan.</div>
+  </section>
+
+  <section id="topupPage" class="page">
+    <div class="ph"><button class="back" onclick="showPage('home')">←</button><h2>Isi Saldo</h2></div>
+    <label>Metode isi saldo</label>
+    <select id="topupMethod"><option>Transfer bank demo</option><option>Virtual account demo</option><option>Setoran tunai demo</option><option>Dompet digital demo</option></select>
+    <label>Nominal (Rp)</label>
+    <div class="items" id="topupChips"></div>
+    <input id="topupAmount" type="number" min="10000" placeholder="Atau masukkan nominal sendiri">
+    <button class="primary" onclick="topup()">Konfirmasi isi saldo</button>
+  </section>
+
+  <section id="transferPage" class="page">
+    <div class="ph"><button class="back" onclick="showPage('home')">←</button><h2>Transfer</h2></div>
+    <label>Bank tujuan</label><div id="transferBank" class="bp"></div>
+    <label>Nomor rekening demo</label><input id="transferAccount" placeholder="Nomor rekening">
+    <label>Nama penerima</label><input id="transferRecipient" placeholder="Nama penerima">
+    <label>Nominal transfer (Rp)</label>
+    <div class="items" id="transferChips"></div>
+    <input id="transferAmount" type="number" min="10000" placeholder="Atau masukkan nominal sendiri">
+    <label>Catatan</label><input id="transferNote" placeholder="Opsional">
+    <button class="primary" onclick="transfer()">Konfirmasi transfer demo</button>
+  </section>
+
+  <section id="withdrawPage" class="page">
+    <div class="ph"><button class="back" onclick="showPage('home')">←</button><h2>Tarik Tunai</h2></div>
+    <label>Pilih bank</label><div id="withdrawBank" class="bp"></div>
+    <label>Metode penarikan</label>
+    <select id="withdrawMethod"><option>ATM demo</option><option>Teller demo</option><option>Agen bank demo</option></select>
+    <label>Nominal</label>
+    <select id="withdrawAmount">
+      <option value="50000">Rp50.000</option><option value="100000">Rp100.000</option><option value="200000">Rp200.000</option>
+      <option value="300000">Rp300.000</option><option value="500000">Rp500.000</option><option value="1000000">Rp1.000.000</option>
+      <option value="other">Nominal lainnya</option>
+    </select>
+    <div id="otherAmountBox" class="hidden"><label>Nominal lainnya (Rp)</label><input id="otherAmount" type="number" placeholder="Kelipatan 50.000"></div>
+    <button class="primary" onclick="withdraw()">Konfirmasi tarik tunai</button>
+  </section>
+
+  <section id="qrisPage" class="page">
+    <div class="ph"><button class="back" onclick="showPage('home')">←</button><h2>Pembayaran QRIS</h2></div>
+    <div class="panel" style="text-align:center">
+      <div class="title">MAHASISWA PAY</div>
+      <span style="background:var(--s);color:var(--b);padding:8px 14px;border-radius:8px;font-weight:900;letter-spacing:2px">QRIS DEMO</span>
+      <div class="qf"><svg id="demoQR" viewBox="0 0 210 210" aria-label="Kode QR demo"></svg></div>
+      <div class="notice">Kode QR ini hanya gambar demo, bukan kode pembayaran yang bisa dipindai.</div>
+      <label style="text-align:left">Nama merchant demo</label><input id="merchant" placeholder="Contoh: Kantin Kampus">
+      <label style="text-align:left">Nominal pembayaran (Rp)</label>
+      <div class="items" id="qrisChips" style="text-align:left"></div>
+      <input id="qrisAmount" type="number" min="1000" placeholder="Atau masukkan nominal">
+      <div class="title" id="qrisPreview" style="margin-top:14px">Rp0</div>
+      <button class="primary" onclick="payQRIS()">Simulasikan pembayaran</button>
+    </div>
+  </section>
+
+  <section id="servicePage" class="page">
+    <div class="ph"><button class="back" onclick="showPage('home')">←</button><h2 id="svTitle"></h2></div>
+    <div id="svForm"></div>
+    <label>Pilih produk / nominal</label>
+    <div class="items" id="svItems"></div>
+    <div id="svAmtBox" class="hidden"><label>Nominal lain (Rp)</label><input id="svAmt" type="number" min="1000" placeholder="Masukkan nominal"></div>
+    <div class="sum" id="svSum"></div>
+    <button class="primary" onclick="buyService()">Bayar (simulasi)</button>
+    <p class="hint">Harga produk hanyalah contoh demo, bukan harga resmi.</p>
+  </section>
+
+  <section id="historyPage" class="page">
+    <div class="ph"><button class="back" onclick="showPage('home')">←</button><h2>Riwayat</h2></div>
+    <div class="panel" id="allTransactions"></div>
+    <button class="secondary" onclick="exportHistory()">Unduh riwayat CSV</button>
+    <button class="secondary" onclick="clearHistory()">Hapus riwayat demo</button>
+  </section>
+
+  <section id="profilePage" class="page">
+    <div class="ph"><button class="back" onclick="showPage('home')">←</button><h2>Profil</h2></div>
+    <div class="panel">
+      <label style="margin-top:0">Nama pengguna</label><input id="pName">
+      <label>Rekening demo</label><input value="1234 5678 9012" readonly>
+      <button class="primary" onclick="saveProfile()">Simpan profil</button>
+    </div>
+    <button class="secondary" onclick="downloadReceipt()">Unduh bukti transaksi terakhir</button>
+    <button class="secondary" onclick="resetDemo()">Reset data demo</button>
+    <button class="primary" onclick="logout()">Keluar</button>
+    <div class="notice">Jangan masukkan PIN, kata sandi, atau data bank rahasia di aplikasi ini.</div>
+  </section>
+
+  <section id="receiptPage" class="page">
+    <div class="ph"><button class="back" onclick="showPage('home')">←</button><h2>Bukti Transaksi</h2></div>
+    <div id="receiptContent" class="receipt"></div>
+    <button class="primary" onclick="downloadReceipt()">Unduh bukti transaksi</button>
+  </section>
+</main>
+
+<nav class="nav">
+  <button class="ni active" data-page="home" onclick="showPage('home')"><span>🏠</span>Beranda</button>
+  <button class="ni" data-page="history" onclick="showPage('history')"><span>📋</span>Riwayat</button>
+  <button class="ni qn" data-page="qris" onclick="showPage('qris')"><span>▦</span>QRIS</button>
+  <button class="ni" data-page="topup" onclick="showPage('topup')"><span>➕</span>Isi Saldo</button>
+  <button class="ni" data-page="profile" onclick="showPage('profile')"><span>👤</span>Profil</button>
+</nav>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const initialBalance=1500000;
+let balance=initialBalance,currentUser="Rara",balanceHidden=false,transactions=[],lastReceipt=null;
+
+const banks=[["Bank Mandiri","M","#003b70"],["Bank BRI","BRI","#00529b"],["Bank BNI","BNI","#ed6b06"],["Bank BTN","BTN","#006cb7"],["Bank BCA","BCA","#0875c9"],["Bank Syariah Indonesia","BSI","#4a8d42"],["Bank Muamalat","Mu","#176b48"],["CIMB Niaga","CIMB","#d71920"],["Bank Danamon","D","#008b8b"],["Bank Permata","P","#009cde"],["Bank Mega","M","#b21f2d"],["OCBC","OC","#d71920"],["Panin Bank","PB","#17458f"],["UOB Indonesia","UOB","#00529b"],["Maybank Indonesia","May","#e5b900"],["Bank Jago","J","#f26b38"],["SeaBank","Sea","#008bcf"],["Allo Bank","Allo","#e64a8b"],["Bank Jatim","JTM","#087f5b"],["Bank BJB","BJB","#1269d8"],["Bank DKI","DKI","#e56a22"],["Bank NTT","NTT","#1269d8"],["Bank lainnya (input manual)","...","#64748b"]];
+
+function rupiah(n){n=Number(n);return Number.isFinite(n)?"Rp"+new Intl.NumberFormat("id-ID",{maximumFractionDigits:0}).format(n):"Rp0"}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+/* ===== LOGIN ===== */
+function loginHints(){
+  const u=$("username").value.trim(),p=$("password").value;
+  $("userHint").textContent=u?"Username: "+u:"Masukkan username kamu.";
+  $("passHint").textContent=p?"Kata sandi terisi ("+p.length+" karakter).":"Masukkan kata sandi demo kamu.";
+}
+function togglePassword(){
+  const p=$("password"),v=p.type==="password";
+  p.type=v?"text":"password";$("tgBtn").textContent=v?"🙈 Sembunyikan":"👁 Tampilkan";
+}
+function login(){
+  const n=$("username").value.trim();
+  if(!n){alert("Masukkan username.");return}
+  if(!$("password").value){alert("Masukkan kata sandi demo.");return}
+  currentUser=n;saveData();
+  $("loginScreen").classList.add("hidden");$("app").classList.remove("hidden");updateUI();
+}
+function logout(){
+  $("app").classList.add("hidden");$("loginScreen").classList.remove("hidden");
+  $("password").value="";loginHints();
+}
+
+/* ===== NAVIGASI & DATA ===== */
+function showPage(name){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  const pg=$(name+"Page");if(pg)pg.classList.add("active");
+  document.querySelectorAll(".ni").forEach(b=>b.classList.toggle("active",b.dataset.page===name));
+  if(name==="qris")drawQR();
+  updateUI();window.scrollTo({top:0,behavior:"smooth"});
+}
+function toggleBalance(){balanceHidden=!balanceHidden;updateUI()}
+function saveData(){try{localStorage.setItem("mahasiswaMobileDemo",JSON.stringify({balance,currentUser,transactions,lastReceipt}))}catch(e){}}
+function loadData(){
+  try{
+    const d=JSON.parse(localStorage.getItem("mahasiswaMobileDemo")||"null");
+    if(d){
+      balance=Number(d.balance);if(!Number.isFinite(balance)||balance<0)balance=initialBalance;
+      currentUser=d.currentUser||"Rara";transactions=Array.isArray(d.transactions)?d.transactions:[];lastReceipt=d.lastReceipt||null;
+    }
+  }catch(e){balance=initialBalance;transactions=[];lastReceipt=null}
+}
+function updateUI(){
+  $("balanceText").textContent=balanceHidden?"Rp ••••••••":rupiah(balance);
+  $("pName").value!==currentUser&&document.activeElement!==$("pName")&&($("pName").value=currentUser);
+  renderTx("recentTransactions",3);renderTx("allTransactions");
+  $("qrisPreview").textContent=rupiah(Number($("qrisAmount").value)||0);
+}
+function renderTx(id,limit=Infinity){
+  const el=$(id);
+  if(!transactions.length){el.innerHTML='<div class="empty">Belum ada transaksi.</div>';return}
+  el.innerHTML=transactions.slice(0,limit).map(t=>{
+    const inc=t.type==="Isi saldo";
+    const ic=t.type==="QRIS"?"▦":t.type==="Tarik tunai"?"🏧":t.type==="Transfer"?"↗️":inc?"➕":"💳";
+    return '<div class="tx"><div>'+ic+'</div><div class="ti"><strong>'+esc(t.type)+'</strong><small>'+esc(t.detail)+'<br>'+esc(t.date)+'</small></div><strong class="'+(inc?'gr':'rd')+'">'+(inc?'+':'-')+rupiah(t.amount)+'</strong></div>';
+  }).join("");
+}
+function validateAmount(v,min=10000){
+  const n=Number(v);
+  if(!Number.isFinite(n)||n<min||!Number.isInteger(n)){alert("Nominal minimal "+rupiah(min)+".");return null}
+  return n;
+}
+function addTransaction(type,amount,detail){
+  const t={id:"DEMO-"+Date.now(),type,amount,detail,date:new Date().toLocaleString("id-ID"),balanceAfter:balance};
+  transactions.unshift(t);lastReceipt=t;saveData();updateUI();showReceipt(t);
+}
+
+/* ===== KARTU NOMINAL CEPAT ===== */
+function chips(boxId,inputId,vals){
+  const box=$(boxId),inp=$(inputId);
+  box.innerHTML=vals.map(v=>'<button type="button" class="ic" data-v="'+v+'"><span class="n">Nominal</span><span class="p">'+rupiah(v)+'</span></button>').join("");
+  box.onclick=e=>{
+    const b=e.target.closest("button");if(!b)return;
+    inp.value=b.dataset.v;mark();updateUI();
+  };
+  function mark(){box.querySelectorAll(".ic").forEach(b=>b.classList.toggle("on",b.dataset.v===inp.value))}
+  inp.addEventListener("input",mark);
+}
+
+/* ===== BANK PICKER ===== */
+function makeBankPicker(id){
+  const root=$(id);
+  root.innerHTML='<button type="button" class="bcur"><span class="bl2"></span><span class="bn"></span><span>⌄</span></button><div class="bm hidden"><input class="bs" placeholder="Cari bank..."><div class="bopts"></div></div>';
+  const btn=root.querySelector(".bcur"),menu=root.querySelector(".bm"),search=root.querySelector(".bs");
+  let sel=4;
+  function refresh(){const b=banks[sel],l=btn.querySelector(".bl2");l.textContent=b[1];l.style.background=b[2];btn.querySelector(".bn").textContent=b[0]}
+  function render(){
+    const q=search.value.toLowerCase();
+    root.querySelector(".bopts").innerHTML=banks.map((b,i)=>({b,i})).filter(x=>x.b[0].toLowerCase().includes(q))
+      .map(x=>'<button class="bo" type="button" data-i="'+x.i+'"><span class="bl2" style="background:'+x.b[2]+'">'+esc(x.b[1])+'</span><span class="bn">'+esc(x.b[0])+'</span></button>').join("");
+    root.querySelectorAll(".bo").forEach(o=>o.onclick=()=>{sel=Number(o.dataset.i);refresh();menu.classList.add("hidden")});
+  }
+  btn.onclick=()=>{document.querySelectorAll(".bm").forEach(m=>m!==menu&&m.classList.add("hidden"));menu.classList.toggle("hidden");search.value="";render()};
+  search.oninput=render;refresh();render();
+  root.getBank=()=>banks[sel][0].includes("lainnya")?(prompt("Masukkan nama bank (catatan demo):")||banks[sel][0]):banks[sel][0];
+}
+
+/* ===== TRANSAKSI UTAMA ===== */
+function topup(){
+  const n=validateAmount($("topupAmount").value);if(n===null)return;
+  if(!confirm("Tambahkan "+rupiah(n)+" ke saldo demo?"))return;
+  balance+=n;addTransaction("Isi saldo",n,$("topupMethod").value);$("topupAmount").value="";
+}
+function transfer(){
+  const bank=$("transferBank").getBank(),acc=$("transferAccount").value.trim(),rec=$("transferRecipient").value.trim(),note=$("transferNote").value.trim();
+  const n=validateAmount($("transferAmount").value);if(n===null)return;
+  if(!acc||!rec){alert("Isi rekening demo dan nama penerima.");return}
+  if(n>balance){alert("Saldo demo tidak mencukupi.");return}
+  if(!confirm("Simulasikan transfer "+rupiah(n)+" ke "+rec+" ("+bank+")?"))return;
+  balance-=n;addTransaction("Transfer",n,bank+" • "+rec+" • "+acc+(note?" • "+note:""));
+}
+function withdraw(){
+  const bank=$("withdrawBank").getBank(),method=$("withdrawMethod").value,v=$("withdrawAmount").value;
+  const n=validateAmount(v==="other"?$("otherAmount").value:v,50000);if(n===null)return;
+  if(n%50000!==0){alert("Nominal harus kelipatan Rp50.000.");return}
+  if(n>balance){alert("Saldo demo tidak mencukupi.");return}
+  if(!confirm("Simulasi tarik tunai\nBank: "+bank+"\nMetode: "+method+"\nNominal: "+rupiah(n)+"\n\nLanjutkan?"))return;
+  balance-=n;addTransaction("Tarik tunai",n,bank+" • "+method);
+}
+function drawQR(){
+  let seed=20261027;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+  let o='<rect width="210" height="210" fill="white"/>';
+  const f=(x,y)=>{o+='<rect x="'+x+'" y="'+y+'" width="56" height="56" fill="#10213a"/><rect x="'+(x+8)+'" y="'+(y+8)+'" width="40" height="40" fill="white"/><rect x="'+(x+16)+'" y="'+(y+16)+'" width="24" height="24" fill="#10213a"/>'};
+  for(let y=5;y<205;y+=10)for(let x=5;x<205;x+=10){
+    if((x<65&&y<65)||(x>145&&y<65)||(x<65&&y>145))continue;
+    if(rnd()>.52)o+='<rect x="'+x+'" y="'+y+'" width="8" height="8" fill="#10213a"/>';
+  }
+  f(5,5);f(149,5);f(5,149);$("demoQR").innerHTML=o;
+}
+function payQRIS(){
+  const m=$("merchant").value.trim()||"Merchant demo";
+  const n=validateAmount($("qrisAmount").value,1000);if(n===null)return;
+  if(n>balance){alert("Saldo demo tidak mencukupi.");return}
+  if(!confirm("Simulasi pembayaran QRIS ke "+m+" sebesar "+rupiah(n)+"?\nTidak ada pembayaran sungguhan."))return;
+  balance-=n;addTransaction("QRIS",n,"Pembayaran demo • "+m);
+  $("qrisAmount").value="";updateUI();
+}
+
+/* ===== LAYANAN (PULSA, DATA, PLN, GAME, VOUCHER, TAGIHAN) ===== */
+const OPS=["Telkomsel","Indosat","XL","AXIS","Tri","Smartfren"];
+const PHONE={k:"no",l:"Nomor tujuan",t:"tel",ph:"08xxxxxxxxxx",v:/^08[0-9]{8,11}$/,e:"Masukkan nomor HP valid, diawali 08."};
+const OP={k:"op",l:"Operator",s:OPS};
+const BILL=[25000,50000,75000,100000,150000,200000,500000,1000000];
+const amt=(vals,pre,d)=>vals.map(v=>({n:pre+rupiah(v),p:v,d}));
+const GC={
+ "Mobile Legends":[["5 Diamonds",1300],["12 Diamonds",3500],["28 Diamonds",7500],["59 Diamonds",15000],["86 Diamonds",22000],["Weekly Diamond Pass",31000],["172 Diamonds",44000],["257 Diamonds",65000],["706 Diamonds",170000]],
+ "Free Fire":[["50 Diamonds",10000],["100 Diamonds",20000],["210 Diamonds",40000],["500 Diamonds",90000]],
+ "PUBG Mobile":[["60 UC",15000],["325 UC",75000],["660 UC",150000]],
+ "Genshin Impact":[["60 Genesis Crystals",16000],["300 + 30 Crystals",79000],["Blessing of the Welkin Moon",79000]],
+ "Valorant":[["125 VP",15000],["420 VP",50000],["700 VP",80000],["1375 VP",150000]],
+ "Roblox":[["80 Robux",16000],["400 Robux",79000],["800 Robux",149000]]
+};
+const bill=(t,i,l,ph,opts)=>({t,i,c:1,f:[...(opts?[{k:"j",l:"Jenis / penyedia",s:opts}]:[]),{k:"id",l:l,ph}],items:()=>amt(BILL,"Nominal ")});
+const SV={
+ pulsa:{t:"Pulsa",i:"📱",f:[OP,PHONE],items:()=>amt([20000,25000,50000,75000,100000,150000,200000,500000,1000000],"Pulsa ","Harga contoh demo")},
+ data:{t:"Paket Data",i:"🌐",f:[OP,PHONE],items:()=>[["3 GB",15000],["6 GB",25000],["12 GB",40000],["20 GB",60000],["35 GB",100000]].map(x=>({n:"Paket "+x[0],p:x[1],d:"Masa aktif mengikuti produk demo"}))},
+ pln:{t:"Token PLN",i:"⚡",f:[{k:"id",l:"Nomor meter / pelanggan",ph:"ID pelanggan"}],items:()=>amt([20000,50000,100000,200000,500000,1000000],"Token ","Nominal token demo")},
+ listrik:bill("Tagihan Listrik","💡","Nomor pelanggan","ID pelanggan"),
+ pdam:bill("PDAM","🚰","Nomor pelanggan","Nomor pelanggan"),
+ internet:bill("Internet Rumah","📡","Nomor pelanggan","ID pelanggan",["IndiHome","Biznet","First Media","MyRepublic","Lainnya"]),
+ bpjs:bill("BPJS","🏥","Nomor peserta","Nomor peserta",["BPJS Kesehatan","BPJS Ketenagakerjaan"]),
+ pajak:bill("Pajak & Lainnya","🏛️","Nomor tagihan","Nomor tagihan",["Pajak PBB / STNK","Pendidikan","Tagihan lainnya"]),
+ cicilan:bill("Cicilan","🚗","Nomor kontrak","Nomor kontrak",["Cicilan barang","Pembiayaan kendaraan","Pembiayaan pendidikan","Lainnya"]),
+ game:{t:"Top Up Game",i:"🎮",f:[{k:"g",l:"Pilih game",s:Object.keys(GC)},{k:"uid",l:"User ID",ph:"Masukkan User ID"},{k:"zone",l:"Zone ID Mobile Legends",ph:"Masukkan Zone ID",w:v=>v.g==="Mobile Legends"}],items:v=>GC[v.g].map(x=>({n:x[0],p:x[1]}))},
+ voucher:{t:"Voucher Digital",i:"🎟️",f:[{k:"v",l:"Pilih layanan",s:["Google Play","Spotify","Netflix","YouTube Premium","Voucher Belanja","Voucher Makanan"]}],items:v=>amt([20000,50000,100000,150000,200000],v.v+" ","Nominal voucher demo")}
+};
+$("svGrid").innerHTML=Object.keys(SV).map(k=>'<button class="sv" onclick="openService(\''+k+'\')"><b>'+SV[k].i+'</b>'+SV[k].t+'</button>').join("");
+
+let cur=null,sel=null,curItems=[];
+function vals(){const o={};cur.f.forEach(f=>o[f.k]=$("f_"+f.k).value.trim());return o}
+function openService(k){
+  cur=SV[k];sel=null;$("svTitle").textContent=cur.i+" "+cur.t;
+  $("svForm").innerHTML=cur.f.map(f=>'<div id="w_'+f.k+'"><label>'+esc(f.l)+'</label>'+(f.s
+    ?'<select id="f_'+f.k+'">'+f.s.map(o=>'<option>'+esc(o)+'</option>').join("")+'</select>'
+    :'<input id="f_'+f.k+'" type="'+(f.t||"text")+'" placeholder="'+esc(f.ph||"")+'">')+'</div>').join("");
+  $("svForm").onchange=e=>{if(e.target.tagName==="SELECT"){sel=null;if(cur.c)$("svAmt").value=""}svRefresh()};
+  $("svAmtBox").classList.toggle("hidden",!cur.c);$("svAmt").value="";
+  svRefresh();showPage("service");
+}
+function svRefresh(){
+  const v=vals();
+  cur.f.forEach(f=>f.w&&$("w_"+f.k).classList.toggle("hidden",!f.w(v)));
+  curItems=cur.items(v);
+  $("svItems").innerHTML=curItems.map((it,i)=>'<button type="button" class="ic'+(sel===i?" on":"")+'" onclick="pick('+i+')"><span class="n">'+esc(it.n)+'</span><span class="p">'+rupiah(it.p)+'</span>'+(it.d?'<span class="d">'+esc(it.d)+'</span>':'')+(sel===i?'<span class="d" style="color:var(--b);font-weight:bold">✓ Dipilih</span>':'')+'</button>').join("");
+  $("svSum").innerHTML=sel!==null?'<strong>Item dipilih:</strong> '+esc(curItems[sel].n)+'<br><strong>Harga:</strong> '+rupiah(curItems[sel].p):'Pilih item untuk melihat ringkasan harga.';
+}
+function pick(i){sel=i;if(cur.c)$("svAmt").value=curItems[i].p;svRefresh()}
+$("svAmt").oninput=()=>{sel=null;svRefresh()};
+function buyService(){
+  const v=vals();
+  for(const f of cur.f){
+    if(f.w&&!f.w(v))continue;
+    if(!v[f.k]){alert("Lengkapi: "+f.l+".");return}
+    if(f.v&&!f.v.test(v[f.k])){alert(f.e);return}
+  }
+  let n,name="";
+  if(cur.c&&$("svAmt").value){n=Number($("svAmt").value)}
+  else if(sel!==null){n=curItems[sel].p;name=curItems[sel].n}
+  else{alert("Pilih produk atau nominal terlebih dahulu.");return}
+  n=validateAmount(n,1000);if(n===null)return;
+  if(n>balance){alert("Saldo demo tidak mencukupi.");return}
+  const detail=cur.f.filter(f=>!f.w||f.w(v)).map(f=>v[f.k]).join(" • ")+(name?" • "+name:"");
+  if(!confirm("Simulasikan "+cur.t+"\n"+detail+"\nNominal: "+rupiah(n)+"\n\nTidak ada pembayaran sungguhan. Lanjutkan?"))return;
+  balance-=n;addTransaction(cur.t,n,detail);
+}
+
+/* ===== BUKTI, RIWAYAT, PROFIL ===== */
+function showReceipt(t){
+  $("receiptContent").innerHTML="<h3 style='text-align:center;color:var(--b)'>MAHASISWA MOBILE</h3><p><b>Status:</b> Berhasil (simulasi)</p><p><b>ID:</b> "+esc(t.id)+"</p><p><b>Jenis:</b> "+esc(t.type)+"</p><p><b>Detail:</b> "+esc(t.detail)+"</p><p><b>Nominal:</b> "+rupiah(t.amount)+"</p><p><b>Waktu:</b> "+esc(t.date)+"</p><p><b>Saldo demo:</b> "+rupiah(t.balanceAfter)+"</p><hr><small>Bukan bukti transaksi bank yang sah.</small>";
+  showPage("receipt");
+}
+function dl(name,text,type){
+  const u=URL.createObjectURL(new Blob([text],{type}));
+  const a=document.createElement("a");a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);
+}
+function downloadReceipt(){
+  if(!lastReceipt){alert("Belum ada transaksi.");return}
+  const t=lastReceipt;
+  dl("bukti-transaksi-demo.txt","MAHASISWA MOBILE - BUKTI TRANSAKSI DEMO\nID: "+t.id+"\nJenis: "+t.type+"\nDetail: "+t.detail+"\nNominal: "+rupiah(t.amount)+"\nWaktu: "+t.date+"\nSaldo demo: "+rupiah(t.balanceAfter)+"\nBukan bukti transaksi bank yang sah.","text/plain;charset=utf-8");
+}
+function exportHistory(){
+  if(!transactions.length){alert("Belum ada riwayat untuk diunduh.");return}
+  const rows=[["Tanggal","Transaksi","Detail","Nominal"],...transactions.map(t=>[t.date,t.type,t.detail,t.amount])];
+  dl("riwayat-mahasiswa-mobile.csv","\uFEFF"+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\n"),"text/csv;charset=utf-8");
+}
+function clearHistory(){if(!confirm("Hapus riwayat demo?"))return;transactions=[];lastReceipt=null;saveData();updateUI()}
+function saveProfile(){
+  const n=$("pName").value.trim();
+  if(!n){alert("Nama tidak boleh kosong.");return}
+  currentUser=n;saveData();alert("Nama profil demo: "+n);
+}
+function resetDemo(){
+  if(!confirm("Reset saldo dan seluruh data demo?"))return;
+  balance=initialBalance;transactions=[];lastReceipt=null;balanceHidden=false;saveData();updateUI();showPage("home");
+}
+
+/* ===== INISIALISASI ===== */
+$("withdrawAmount").onchange=e=>$("otherAmountBox").classList.toggle("hidden",e.target.value!=="other");
+$("qrisAmount").addEventListener("input",updateUI);
+makeBankPicker("transferBank");makeBankPicker("withdrawBank");
+chips("topupChips","topupAmount",[20000,50000,100000,200000]);
+chips("transferChips","transferAmount",[25000,50000,100000,250000,500000]);
+chips("qrisChips","qrisAmount",[10000,15000,25000,50000,100000]);
+loadData();$("username").value=currentUser;loginHints();updateUI();drawQR();
+</script>
+</body>
+</html>
